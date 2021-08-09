@@ -6,8 +6,12 @@ import pathlib
 import json
 
 root = ""
+try:
+    with open(str(pathlib.Path(__file__).parent.resolve()) + "\\config.json", "r") as f:
+        dat = f.read()
+except:
+    dat = ""
 with open(str(pathlib.Path(__file__).parent.resolve()) + "\\config.json", "w+") as f:
-    dat = f.read()
 
     def getRoot():
         global root
@@ -18,6 +22,7 @@ with open(str(pathlib.Path(__file__).parent.resolve()) + "\\config.json", "w+") 
         a = json.loads(dat)
         if "root" not in a:
             getRoot()
+        root = a["root"]
     except:
         getRoot()
 
